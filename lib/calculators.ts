@@ -34,13 +34,13 @@ import ProfitMarginCalculator from "@/components/calculators/finance/ProfitMargi
 import NetPresentValueCalculator from "@/components/calculators/finance/NetPresentValueCalculator";
 
 // Real estate investment (7)
-import BreakEvenCalculator from "@/components/calculators/real-estate/BreakEvenCalculator";
-import CashflowCalculator from "@/components/calculators/real-estate/CashflowCalculator";
-import GrossRentMultiplierCalculator from "@/components/calculators/real-estate/GrossRentMultiPropertyCalculator";
-import RentalYieldCalculator from "@/components/calculators/real-estate/RentalYieldCalculator";
-import NetOperatingIncomeCalculator from "@/components/calculators/real-estate/NetOperatingIncomeCalculator";
-import PropertyAppreciationCalculator from "@/components/calculators/real-estate/PropertyAppreciationFeeCalculator";
-import PropertyManagementFeesCalculator from "@/components/calculators/real-estate/PropertyManagementFeeCalculator";
+import BreakEvenCalculator from "@/components/calculators/realestate/BreakEvenCalculator";
+import CashflowCalculator from "@/components/calculators/realestate/CashflowCalculator";
+import GrossRentMultiplierCalculator from "@/components/calculators/realestate/GrossRentMultiPropertyCalculator";
+import RentalYieldCalculator from "@/components/calculators/realestate/RentalYieldCalculator";
+import NetOperatingIncomeCalculator from "@/components/calculators/realestate/NetOperatingIncomeCalculator";
+import PropertyAppreciationCalculator from "@/components/calculators/realestate/PropertyAppreciationFeeCalculator";
+import PropertyManagementFeesCalculator from "@/components/calculators/realestate/PropertyManagementFeeCalculator";
 // brrr strategy roi 
 
 // Mortgage (2)
