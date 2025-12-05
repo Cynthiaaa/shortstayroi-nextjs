@@ -33,14 +33,14 @@ import SavingGoalCalculator from "@/components/calculators/finance/SavingGoalCal
 import ProfitMarginCalculator from "@/components/calculators/finance/ProfitMarginCalculator";
 import NetPresentValueCalculator from "@/components/calculators/finance/NetPresentValueCalculator";
 
-// Real estate investment (8)
-// rental yield calculator 
-// property management fee calc
-// property appreciation fee
-// net operating income calc 
-// gross rent multi property calc
-// cashflow cal 
-// break even calc 
+// Real estate investment (7)
+import BreakEvenCalculator from "@/components/calculators/real-estate/BreakEvenCalculator";
+import CashflowCalculator from "@/components/calculators/real-estate/CashflowCalculator";
+import GrossRentMultiplierCalculator from "@/components/calculators/real-estate/GrossRentMultiPropertyCalculator";
+import RentalYieldCalculator from "@/components/calculators/real-estate/RentalYieldCalculator";
+import NetOperatingIncomeCalculator from "@/components/calculators/real-estate/NetOperatingIncomeCalculator";
+import PropertyAppreciationCalculator from "@/components/calculators/real-estate/PropertyAppreciationFeeCalculator";
+import PropertyManagementFeesCalculator from "@/components/calculators/real-estate/PropertyManagementFeeCalculator";
 // brrr strategy roi 
 
 // Mortgage (2)
@@ -139,7 +139,13 @@ export const categories = [
     slug: "real-estate-calculators",
     name: "Real Estate Calculators",
     calculators: [
-   
+      { slug: "break-even-calculator", name: "Break Even Calculator", component: BreakEvenCalculator },   
+      { slug: "cash-flow-calculator", name: "Cash Flow Calculator", component: CashflowCalculator },
+      { slug: "gross-rent-multiplier-property-calculator", name: "Gross Rent Multiplier Property Calculator", component: GrossRentMultiplierCalculator },   
+      { slug: "net-operating-income-calculator", name: "Net Operating Income Calculator", component: NetOperatingIncomeCalculator },   
+      { slug: "property-appreciation-fee-calculator", name: "Property Appreciation Fee Calculator", component: PropertyAppreciationCalculator },   
+      { slug: "property-management-fee-calculator", name: "Property Management Fee Calculator", component: PropertyManagementFeesCalculator },
+      { slug: "rental-yield-calculator", name: "Rental Yield Calculator", component: RentalYieldCalculator },   
     ],
   },
 ];
