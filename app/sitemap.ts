@@ -1,10 +1,10 @@
-import { MetadataRoute } from "next";
 import { categories } from "@/lib/calculators";
+import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.shortstayroi.com"; // <-- change to your domain
 
-  // Main pages
+  // Main static pages
   const staticPages = [
     "",
     "/about",
@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ].map((path) => ({
     url: `${baseUrl}${path}`,
     lastModified: new Date(),
-    changeFrequency: "monthly",
+    changeFrequency: "monthly" as const, // explicitly as const
     priority: 0.8,
   }));
 
@@ -25,14 +25,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const calcUrls = cat.calculators.map((calc) => ({
       url: `${categoryUrl}/${calc.slug}`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
+      changeFrequency: "weekly" as const,
       priority: 0.7,
     }));
+
     return [
       {
         url: categoryUrl,
         lastModified: new Date(),
-        changeFrequency: "weekly",
+        changeFrequency: "weekly" as const,
         priority: 0.8,
       },
       ...calcUrls,

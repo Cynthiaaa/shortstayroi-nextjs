@@ -49,7 +49,11 @@ const SavingGoalCalculator: React.FC = () => {
     script.type = "application/ld+json";
     script.innerHTML = JSON.stringify(faqSchema);
     document.head.appendChild(script);
-    return () => document.head.removeChild(script);
+
+    // Cleanup: remove script on unmount
+    return (): void => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (

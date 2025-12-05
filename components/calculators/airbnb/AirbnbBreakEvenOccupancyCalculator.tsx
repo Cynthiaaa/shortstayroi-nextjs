@@ -21,38 +21,42 @@ const AirbnbBreakEvenOccupancyCalculator: React.FC = () => {
     const faqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": [
+      mainEntity: [
         {
           "@type": "Question",
-          "name": "What is break-even occupancy for Airbnb?",
-          "acceptedAnswer": {
+          name: "What is break-even occupancy for Airbnb?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Break-even occupancy is the minimum number of nights per month or year you need to rent your property at a given nightly rate to cover all expenses."
+            text: "Break-even occupancy is the minimum number of nights per month or year you need to rent your property at a given nightly rate to cover all expenses."
           }
         },
         {
           "@type": "Question",
-          "name": "How do I calculate my Airbnb break-even occupancy?",
-          "acceptedAnswer": {
+          name: "How do I calculate my Airbnb break-even occupancy?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Add up your fixed costs (mortgage, insurance, utilities) and variable costs (cleaning, management), then divide by your nightly rate."
+            text: "Add up your fixed costs (mortgage, insurance, utilities) and variable costs (cleaning, management), then divide by your nightly rate."
           }
         },
         {
           "@type": "Question",
-          "name": "Why is occupancy rate important for Airbnb hosts?",
-          "acceptedAnswer": {
+          name: "Why is occupancy rate important for Airbnb hosts?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Knowing your break-even occupancy helps you price your listing appropriately and forecast profitability."
+            text: "Knowing your break-even occupancy helps you price your listing appropriately and forecast profitability."
           }
         }
       ]
     };
+
     const script = document.createElement("script");
     script.type = "application/ld+json";
     script.innerHTML = JSON.stringify(faqSchema);
     document.head.appendChild(script);
-    return () => document.head.removeChild(script);
+
+    return (): void => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (

@@ -30,29 +30,29 @@ const HotelBreakEvenCalculator = () => {
     const faqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": [
+      mainEntity: [
         {
           "@type": "Question",
-          "name": "What is a hotel break-even point?",
-          "acceptedAnswer": {
+          name: "What is a hotel break-even point?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "The hotel break-even point is the occupancy level or number of rooms that must be sold to cover all fixed and variable costs."
+            text: "The hotel break-even point is the occupancy level or number of rooms that must be sold to cover all fixed and variable costs."
           }
         },
         {
           "@type": "Question",
-          "name": "How is hotel break-even occupancy calculated?",
-          "acceptedAnswer": {
+          name: "How is hotel break-even occupancy calculated?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Divide your total fixed costs by the contribution margin (average room rate minus variable cost per room) and compare that to your available rooms."
+            text: "Divide your total fixed costs by the contribution margin (average room rate minus variable cost per room) and compare that to your available rooms."
           }
         },
         {
           "@type": "Question",
-          "name": "Why is break-even analysis important for hotels?",
-          "acceptedAnswer": {
+          name: "Why is break-even analysis important for hotels?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Knowing your break-even occupancy helps you set pricing, manage costs, and plan for profitability during high and low demand seasons."
+            text: "Knowing your break-even occupancy helps you set pricing, manage costs, and plan for profitability during high and low demand seasons."
           }
         }
       ]
@@ -61,7 +61,11 @@ const HotelBreakEvenCalculator = () => {
     script.type = "application/ld+json";
     script.innerHTML = JSON.stringify(faqSchema);
     document.head.appendChild(script);
-    return () => document.head.removeChild(script);
+
+    // Cleanup: remove script on unmount
+    return (): void => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (

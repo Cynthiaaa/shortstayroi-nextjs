@@ -1,7 +1,7 @@
-"use client"; // this makes it a client component
+"use client";
 
 import { useState, useEffect } from "react";
-import CalculatorLayout from "../CalculatorLayout"; // adjust path if needed
+import CalculatorLayout from "../CalculatorLayout";
 
 interface Property {
   name: string;
@@ -32,10 +32,13 @@ const AirbnbMultiPropertyRoiCalculator: React.FC = () => {
     ]);
   };
 
+  // ✅ Fixed handleChange
   const handleChange = (index: number, field: keyof Property, value: number) => {
-    const updated = [...properties];
-    updated[index][field] = value;
-    setProperties(updated);
+    setProperties((prev) => {
+      const updated = [...prev];
+      updated[index] = { ...updated[index], [field]: value };
+      return updated;
+    });
   };
 
   const calculatePortfolioROI = () => {
@@ -54,38 +57,42 @@ const AirbnbMultiPropertyRoiCalculator: React.FC = () => {
     const faqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": [
+      mainEntity: [
         {
           "@type": "Question",
-          "name": "How do I calculate ROI for multiple Airbnb properties?",
-          "acceptedAnswer": {
+          name: "How do I calculate ROI for multiple Airbnb properties?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Add up the total revenue and expenses from all your Airbnb properties, subtract expenses from revenue to get profit, and divide by total property costs to get overall ROI."
+            text: "Add up the total revenue and expenses from all your Airbnb properties, subtract expenses from revenue to get profit, and divide by total property costs to get overall ROI."
           }
         },
         {
           "@type": "Question",
-          "name": "Why calculate portfolio ROI for Airbnb?",
-          "acceptedAnswer": {
+          name: "Why calculate portfolio ROI for Airbnb?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Calculating portfolio ROI helps hosts and investors understand which properties perform best and how their combined returns compare to other investments."
+            text: "Calculating portfolio ROI helps hosts and investors understand which properties perform best and how their combined returns compare to other investments."
           }
         },
         {
           "@type": "Question",
-          "name": "What’s a good ROI for multiple Airbnb properties?",
-          "acceptedAnswer": {
+          name: "What’s a good ROI for multiple Airbnb properties?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Strong Airbnb portfolios often deliver ROI between 10–20% annually, depending on market, occupancy rates, and management efficiency."
+            text: "Strong Airbnb portfolios often deliver ROI between 10–20% annually, depending on market, occupancy rates, and management efficiency."
           }
         }
       ]
     };
+
     const script = document.createElement("script");
     script.type = "application/ld+json";
     script.innerHTML = JSON.stringify(faqSchema);
     document.head.appendChild(script);
-    return () => document.head.removeChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (
@@ -100,57 +107,15 @@ const AirbnbMultiPropertyRoiCalculator: React.FC = () => {
           <p>
             The <strong>Airbnb Multi-Property ROI Calculator</strong> helps
             investors and hosts analyze total returns across multiple Airbnb units.
-            It combines revenue, expenses, and costs from all properties to show
-            total and average ROI — giving you a clear portfolio overview.
           </p>
-
-          <h3 className="text-xl font-semibold mt-6">Why Multi-Property ROI Matters</h3>
-          <p>
-            Managing several short-term rentals requires tracking each property's
-            profitability. This calculator simplifies portfolio analysis so you can
-            identify which listings are underperforming and optimize pricing,
-            management, or financing strategies.
-          </p>
-
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-center font-mono text-sm sm:text-base my-4">
-            Portfolio ROI = (Total Profit ÷ Total Property Cost) × 100
-          </div>
-
-          <h3 className="text-xl font-semibold mt-6">Example Calculation</h3>
-          <p>
-            Suppose you own three Airbnb properties worth $800,000 combined,
-            generating $200,000 in revenue and $120,000 in expenses. Your annual
-            portfolio ROI would be:
-          </p>
-          <div className="bg-blue-50 p-4 rounded-lg text-center font-mono text-sm sm:text-base my-4">
-            ($200,000 − $120,000) ÷ $800,000 × 100 = 10%
-          </div>
-
-          <p>
-            Tracking ROI across all properties gives you insights into which markets
-            or management strategies yield the highest returns.
-          </p>
-
-          <h3 className="text-xl font-semibold mt-6">Tips to Improve ROI</h3>
-          <ul className="list-disc list-inside space-y-2">
-            <li>Standardize cleaning and maintenance to reduce variable costs</li>
-            <li>Reinvest profits from high-performing units into new properties</li>
-            <li>Use dynamic pricing tools across your portfolio</li>
-            <li>Track property-specific ROI quarterly for trends</li>
-          </ul>
         </>
       }
     >
       {/* PROPERTY INPUTS */}
       <div className="space-y-6">
         {properties.map((p, idx) => (
-          <div
-            key={idx}
-            className="border border-gray-200 rounded-lg p-4 shadow-sm bg-white"
-          >
-            <h4 className="text-lg font-semibold mb-4 text-blue-700">
-              {p.name}
-            </h4>
+          <div key={idx} className="border border-gray-200 rounded-lg p-4 shadow-sm bg-white">
+            <h4 className="text-lg font-semibold mb-4 text-blue-700">{p.name}</h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-gray-700 font-semibold mb-1">
@@ -158,10 +123,8 @@ const AirbnbMultiPropertyRoiCalculator: React.FC = () => {
                 </label>
                 <input
                   type="number"
-                  value={p.price || ""}
-                  onChange={(e) =>
-                    handleChange(idx, "price", parseFloat(e.target.value) || 0)
-                  }
+                  value={p.price}
+                  onChange={(e) => handleChange(idx, "price", parseFloat(e.target.value) || 0)}
                   className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400"
                 />
               </div>
@@ -171,10 +134,8 @@ const AirbnbMultiPropertyRoiCalculator: React.FC = () => {
                 </label>
                 <input
                   type="number"
-                  value={p.annualRevenue || ""}
-                  onChange={(e) =>
-                    handleChange(idx, "annualRevenue", parseFloat(e.target.value) || 0)
-                  }
+                  value={p.annualRevenue}
+                  onChange={(e) => handleChange(idx, "annualRevenue", parseFloat(e.target.value) || 0)}
                   className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400"
                 />
               </div>
@@ -184,17 +145,14 @@ const AirbnbMultiPropertyRoiCalculator: React.FC = () => {
                 </label>
                 <input
                   type="number"
-                  value={p.annualExpenses || ""}
-                  onChange={(e) =>
-                    handleChange(idx, "annualExpenses", parseFloat(e.target.value) || 0)
-                  }
+                  value={p.annualExpenses}
+                  onChange={(e) => handleChange(idx, "annualExpenses", parseFloat(e.target.value) || 0)}
                   className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400"
                 />
               </div>
             </div>
           </div>
         ))}
-
         <div className="text-center">
           <button
             onClick={addProperty}
@@ -220,21 +178,15 @@ const AirbnbMultiPropertyRoiCalculator: React.FC = () => {
         <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
           <div className="bg-green-50 p-4 rounded-xl">
             <h3 className="text-gray-700 font-medium">Total Profit</h3>
-            <p className="text-2xl font-bold text-green-700">
-              ${results.totalProfit.toFixed(2)}
-            </p>
+            <p className="text-2xl font-bold text-green-700">${results.totalProfit.toFixed(2)}</p>
           </div>
           <div className="bg-blue-50 p-4 rounded-xl">
             <h3 className="text-gray-700 font-medium">Total ROI</h3>
-            <p className="text-2xl font-bold text-blue-700">
-              {results.totalROI.toFixed(2)}%
-            </p>
+            <p className="text-2xl font-bold text-blue-700">{results.totalROI.toFixed(2)}%</p>
           </div>
           <div className="bg-purple-50 p-4 rounded-xl">
             <h3 className="text-gray-700 font-medium">Average ROI per Property</h3>
-            <p className="text-2xl font-bold text-purple-700">
-              {results.avgROI.toFixed(2)}%
-            </p>
+            <p className="text-2xl font-bold text-purple-700">{results.avgROI.toFixed(2)}%</p>
           </div>
         </div>
       )}

@@ -27,38 +27,43 @@ const AirbnbCleaningTimeLaborCostCalculator: React.FC = () => {
     const faqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": [
+      mainEntity: [
         {
           "@type": "Question",
-          "name": "How do I calculate Airbnb cleaning labor costs?",
-          "acceptedAnswer": {
+          name: "How do I calculate Airbnb cleaning labor costs?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Multiply the number of hours it takes to clean your property by the hourly rate of your cleaner, then add the cost of supplies and divide by the number of cleans per month."
+            text: "Multiply the number of hours it takes to clean your property by the hourly rate of your cleaner, then add the cost of supplies and divide by the number of cleans per month."
           }
         },
         {
           "@type": "Question",
-          "name": "How much should I pay for Airbnb cleaning labor?",
-          "acceptedAnswer": {
+          name: "How much should I pay for Airbnb cleaning labor?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Typical cleaning labor costs range from $20 to $50 per hour depending on location, property size, and frequency of cleanings."
+            text: "Typical cleaning labor costs range from $20 to $50 per hour depending on location, property size, and frequency of cleanings."
           }
         },
         {
           "@type": "Question",
-          "name": "How often should Airbnb properties be cleaned?",
-          "acceptedAnswer": {
+          name: "How often should Airbnb properties be cleaned?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Most Airbnb rentals are cleaned after each guest stay, so the number of cleanings per month depends on occupancy and stay length."
+            text: "Most Airbnb rentals are cleaned after each guest stay, so the number of cleanings per month depends on occupancy and stay length."
           }
         }
       ]
     };
+
     const script = document.createElement("script");
     script.type = "application/ld+json";
     script.innerHTML = JSON.stringify(faqSchema);
     document.head.appendChild(script);
-    return () => document.head.removeChild(script);
+
+    // Cleanup on unmount
+    return (): void => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (

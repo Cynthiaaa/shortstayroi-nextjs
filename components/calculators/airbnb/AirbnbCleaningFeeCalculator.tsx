@@ -32,38 +32,43 @@ const AirbnbCleaningFeeCalculator: React.FC = () => {
     const faqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": [
+      mainEntity: [
         {
           "@type": "Question",
-          "name": "How do I calculate my Airbnb cleaning fee?",
-          "acceptedAnswer": {
+          name: "How do I calculate my Airbnb cleaning fee?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Add together your labor cost (hours × hourly rate), cleaning supplies, and a small overhead percentage. Divide by the number of monthly bookings to get cost per clean, then add a 5–10% margin."
+            text: "Add together your labor cost (hours × hourly rate), cleaning supplies, and a small overhead percentage. Divide by the number of monthly bookings to get cost per clean, then add a 5–10% margin."
           }
         },
         {
           "@type": "Question",
-          "name": "What is a reasonable Airbnb cleaning fee?",
-          "acceptedAnswer": {
+          name: "What is a reasonable Airbnb cleaning fee?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Typical Airbnb cleaning fees range between $50 and $150 per stay depending on property size, location, and local market rates."
+            text: "Typical Airbnb cleaning fees range between $50 and $150 per stay depending on property size, location, and local market rates."
           }
         },
         {
           "@type": "Question",
-          "name": "Should I profit from my Airbnb cleaning fee?",
-          "acceptedAnswer": {
+          name: "Should I profit from my Airbnb cleaning fee?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "While cleaning fees are primarily to cover costs, including a small margin for coordination and time spent managing cleanings is acceptable and common."
+            text: "While cleaning fees are primarily to cover costs, including a small margin for coordination and time spent managing cleanings is acceptable and common."
           }
         }
       ]
     };
+
     const script = document.createElement("script");
     script.type = "application/ld+json";
     script.innerHTML = JSON.stringify(faqSchema);
     document.head.appendChild(script);
-    return () => document.head.removeChild(script);
+
+    // Cleanup: remove script on unmount
+    return (): void => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (

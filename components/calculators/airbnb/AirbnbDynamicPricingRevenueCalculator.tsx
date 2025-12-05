@@ -30,29 +30,29 @@ const AirbnbDynamicPricingRevenueCalculator: React.FC = () => {
     const faqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": [
+      mainEntity: [
         {
           "@type": "Question",
-          "name": "What is dynamic pricing for Airbnb?",
-          "acceptedAnswer": {
+          name: "What is dynamic pricing for Airbnb?",
+          acceptedAnswer: {
             "@type": "Answer",
             "text": "Dynamic pricing automatically adjusts your Airbnb nightly rates based on demand, seasonality, local events, and competition to maximize revenue."
           }
         },
         {
           "@type": "Question",
-          "name": "How do I calculate Airbnb revenue using dynamic pricing?",
-          "acceptedAnswer": {
+          name: "How do I calculate Airbnb revenue using dynamic pricing?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "You can estimate Airbnb revenue by modeling different nightly rates and occupancy levels for low, mid, and high seasons to understand annual earnings potential."
+            text: "You can estimate Airbnb revenue by modeling different nightly rates and occupancy levels for low, mid, and high seasons to understand annual earnings potential."
           }
         },
         {
           "@type": "Question",
-          "name": "What are the best tools for Airbnb dynamic pricing?",
-          "acceptedAnswer": {
+          name: "What are the best tools for Airbnb dynamic pricing?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Hosts often use tools like Wheelhouse, Beyond Pricing, or Pricelabs to automate Airbnb rate adjustments based on real-time market data."
+            text: "Hosts often use tools like Wheelhouse, Beyond Pricing, or Pricelabs to automate Airbnb rate adjustments based on real-time market data."
           }
         }
       ]
@@ -61,9 +61,13 @@ const AirbnbDynamicPricingRevenueCalculator: React.FC = () => {
     script.type = "application/ld+json";
     script.innerHTML = JSON.stringify(faqSchema);
     document.head.appendChild(script);
-    return () => document.head.removeChild(script);
-  }, []);
 
+    // Cleanup on unmount
+    return (): void => {
+      document.head.removeChild(script);
+    };
+  }, []);
+  
   return (
     <CalculatorLayout
       title="Airbnb Dynamic Pricing Revenue Calculator"

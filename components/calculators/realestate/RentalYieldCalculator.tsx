@@ -52,7 +52,8 @@ const RentalYieldCalculator: React.FC = () => {
     script.innerHTML = JSON.stringify(faqSchema);
     document.head.appendChild(script);
 
-    return () => {
+    // Cleanup: remove script on unmount
+    return (): void => {
       document.head.removeChild(script);
     };
   }, []);
