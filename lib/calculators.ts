@@ -59,8 +59,20 @@ import SeasonalDemandSimulator from "@/components/calculators/pricing/SeasonalDe
 import CustomerAcquisitionCostCalculator from "@/components/calculators/pricing/CustomerAcquisitionCostCalculator";
 import CustomerLifetimeValueCalculator from "@/components/calculators/pricing/CustomerLifetimeValueCalculator";
 
+export interface Calculator {
+  slug: string;
+  name: string;
+  description?: string;
+  component: React.FC<any>;
+}
 
-export const categories = [
+export interface CalculatorCategory {
+  slug: string;
+  name: string;
+  calculators: Calculator[];
+}
+
+export const categories: CalculatorCategory[] = [
   {
     slug: "airbnb-calculators",
     name: "Airbnb Calculators",
