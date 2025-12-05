@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 
 export const metadata = {
   title: "Short Stay ROI",
@@ -14,6 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main className="pt-20 min-h-[80vh]">{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );
