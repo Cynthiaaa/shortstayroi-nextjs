@@ -1,7 +1,7 @@
-"use client";
+"use client"; // this makes it a client component
 
-import React, { useState } from "react";
-import CalculatorLayout from "../CalculatorLayout"; 
+import { useState, useEffect } from "react";
+import CalculatorLayout from "../CalculatorLayout"; // adjust path if needed
 
 const AirbnbADRCalculator: React.FC = () => {
   const [totalRevenue, setTotalRevenue] = useState<number>(0);
@@ -67,7 +67,6 @@ const AirbnbADRCalculator: React.FC = () => {
           />
         </div>
       </div>
-
       <div className="text-center mt-8">
         <button
           onClick={calculateADR}

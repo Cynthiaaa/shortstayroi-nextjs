@@ -1,5 +1,5 @@
 "use client";
-
+// MAIN CALCULATOR DO NOT MOVE
 import React, { useState } from "react";
 
 const RoiCalculator: React.FC = () => {
