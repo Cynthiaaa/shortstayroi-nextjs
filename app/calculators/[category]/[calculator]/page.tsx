@@ -1,4 +1,3 @@
-"use client";
 import { categories } from "@/lib/calculators";
 import { use } from "react";
 
