@@ -55,9 +55,9 @@ import ProRataRentCalculator from "@/components/calculators/landlord/ProrataRent
 import RentIncreaseCalculator from "@/components/calculators/landlord/RentIncreaseCalculator";
 
 // Pricing (3)
-// seasonal demand simulator 
-// customer lifetime value 
-// customer acquisition cost acquisition 
+import SeasonalDemandSimulator from "@/components/calculators/pricing/SeasonalDemandSimulator";
+import CustomerAcquisitionCostCalculator from "@/components/calculators/pricing/CustomerAcquisitionCostCalculator";
+import CustomerLifetimeValueCalculator from "@/components/calculators/pricing/CustomerLifetimeValueCalculator";
 
 
 export const categories = [
@@ -130,7 +130,9 @@ export const categories = [
     slug: "pricing-calculators",
     name: "Pricing Calculators",
     calculators: [
-   
+      { slug: "customer-acquisition-cost-calculator", name: "Customer Acquisition Cost Calculator", component: CustomerAcquisitionCostCalculator },   
+      { slug: "customer-lifetime-value-calculator", name: "Customer Lifetime Value Calculator", component: CustomerLifetimeValueCalculator },
+      { slug: "seasonal-demand-simulator", name: "Seasonal Demand Calculator", component: SeasonalDemandSimulator },   
     ],
   },
   {
