@@ -44,8 +44,8 @@ import NetPresentValueCalculator from "@/components/calculators/finance/NetPrese
 // brrr strategy roi 
 
 // mortgage (2)
-// mortgage calc
-// loan to value ==>
+import MortgageCalculator from "@/components/calculators/mortgage/MortgageCalculator";
+import LoanToValueCalculator from "@/components/calculators/mortgage/LoanToValueCalculator";
 
 // Landlord (5)
 // security deposit interest calcularo
@@ -118,7 +118,8 @@ export const categories = [
     slug: "mortgage-calculators",
     name: "Mortgage Calculators",
     calculators: [
-   
+      { slug: "loan-to-value-calculator", name: "Loan To Value Calculator", component: LoanToValueCalculator },   
+      { slug: "mortgage-calculator", name: "Mortgage Calculator", component:  MortgageCalculator},
     ],
   },
   {
