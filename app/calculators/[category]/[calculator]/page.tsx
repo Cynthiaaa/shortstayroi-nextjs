@@ -1,18 +1,24 @@
+"use client";
 import { categories } from "@/lib/calculators";
-import { notFound } from "next/navigation";
+import { use } from "react";
 
-export default function CalculatorPage({ params }: { params: { category: string; calculator: string } }) {
-  const cat = categories.find(c => c.slug === params.category);
-  if (!cat) return notFound();
+interface Props {
+  params: { category: string; calculator: string };
+}
 
-  const calc = cat.calculators.find(c => c.slug === params.calculator);
-  if (!calc) return notFound();
+export default function CalculatorPage({ params }: Props) {
+  const { category, calculator } = use(params); 
+
+  const cat = categories.find(c => c.slug === category);
+  if (!cat) return <div>Category not found</div>;
+
+  const calc = cat.calculators.find(c => c.slug === calculator);
+  if (!calc) return <div>Calculator not found</div>;
 
   const CalculatorComponent = calc.component;
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">{calc.name}</h1>
       <CalculatorComponent />
     </div>
   );

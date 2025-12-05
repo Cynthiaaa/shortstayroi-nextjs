@@ -1,55 +1,61 @@
-"use client"; // because it uses useState/useEffect
+"use client"; // this makes it a client component
 
 import { useState, useEffect } from "react";
+import CalculatorLayout from "../CalculatorLayout"; // adjust path if needed
 
-const HotelBreakEvenCalculator: React.FC = () => {
-  const [fixedCosts, setFixedCosts] = useState<number>(0);
-  const [variableCostPerRoom, setVariableCostPerRoom] = useState<number>(0);
-  const [avgDailyRate, setAvgDailyRate] = useState<number>(0);
-  const [roomsAvailable, setRoomsAvailable] = useState<number>(0);
-  const [results, setResults] = useState<{ breakEvenRooms: number; breakEvenOccupancy: number } | null>(null);
+const HotelBreakEvenCalculator = () => {
+  const [fixedCosts, setFixedCosts] = useState(0);
+  const [variableCostPerRoom, setVariableCostPerRoom] = useState(0);
+  const [avgDailyRate, setAvgDailyRate] = useState(0);
+  const [roomsAvailable, setRoomsAvailable] = useState(0);
+  const [results, setResults] = useState<{
+    breakEvenRooms: number;
+    breakEvenOccupancy: number;
+  } | null>(null);
 
   const calculateBreakEven = () => {
-    if (avgDailyRate <= variableCostPerRoom) return setResults({ breakEvenRooms: 0, breakEvenOccupancy: 0 });
-
+    if (avgDailyRate <= variableCostPerRoom) {
+      return setResults({ breakEvenRooms: 0, breakEvenOccupancy: 0 });
+    }
     const contributionMargin = avgDailyRate - variableCostPerRoom;
     const breakEvenRooms = fixedCosts / contributionMargin;
-    const breakEvenOccupancy = roomsAvailable > 0 ? (breakEvenRooms / roomsAvailable) * 100 : 0;
+    const breakEvenOccupancy =
+      roomsAvailable > 0 ? (breakEvenRooms / roomsAvailable) * 100 : 0;
 
     setResults({ breakEvenRooms, breakEvenOccupancy });
   };
 
-  // --- SEO FAQ structured data
+  // --- SEO FAQ structured data ---
   useEffect(() => {
     const faqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: [
+      "mainEntity": [
         {
           "@type": "Question",
-          name: "What is a hotel break-even point?",
-          acceptedAnswer: {
+          "name": "What is a hotel break-even point?",
+          "acceptedAnswer": {
             "@type": "Answer",
-            text: "The hotel break-even point is the occupancy level or number of rooms that must be sold to cover all fixed and variable costs.",
-          },
+            "text": "The hotel break-even point is the occupancy level or number of rooms that must be sold to cover all fixed and variable costs."
+          }
         },
         {
           "@type": "Question",
-          name: "How is hotel break-even occupancy calculated?",
-          acceptedAnswer: {
+          "name": "How is hotel break-even occupancy calculated?",
+          "acceptedAnswer": {
             "@type": "Answer",
-            text: "Divide your total fixed costs by the contribution margin (average room rate minus variable cost per room) and compare that to your available rooms.",
-          },
+            "text": "Divide your total fixed costs by the contribution margin (average room rate minus variable cost per room) and compare that to your available rooms."
+          }
         },
         {
           "@type": "Question",
-          name: "Why is break-even analysis important for hotels?",
-          acceptedAnswer: {
+          "name": "Why is break-even analysis important for hotels?",
+          "acceptedAnswer": {
             "@type": "Answer",
-            text: "Knowing your break-even occupancy helps you set pricing, manage costs, and plan for profitability during high and low demand seasons.",
-          },
-        },
-      ],
+            "text": "Knowing your break-even occupancy helps you set pricing, manage costs, and plan for profitability during high and low demand seasons."
+          }
+        }
+      ]
     };
     const script = document.createElement("script");
     script.type = "application/ld+json";
@@ -59,8 +65,24 @@ const HotelBreakEvenCalculator: React.FC = () => {
   }, []);
 
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border rounded-lg shadow">
+    <CalculatorLayout
+      title="Hotel Break-Even Calculator"
+      description="Estimate how many rooms your hotel must sell to cover all fixed and variable costs — and find your break-even occupancy rate."
+      seoContent={
+        <>
+          <h2 className="text-2xl font-semibold mt-6 text-gray-900">
+            Find Your Hotel’s Break-Even Occupancy
+          </h2>
+          <p>
+            The <strong>Hotel Break-Even Calculator</strong> helps hoteliers determine
+            how many rooms must be sold — or what occupancy rate is required —
+            to cover all operational expenses.
+          </p>
+        </>
+      }
+    >
+      {/* INPUT FORM */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {[
           { label: "Fixed Monthly Costs ($)", value: fixedCosts, setter: setFixedCosts },
           { label: "Variable Cost per Room ($)", value: variableCostPerRoom, setter: setVariableCostPerRoom },
@@ -79,28 +101,35 @@ const HotelBreakEvenCalculator: React.FC = () => {
         ))}
       </div>
 
-      <div className="text-center">
+      {/* BUTTON */}
+      <div className="text-center mt-8">
         <button
           onClick={calculateBreakEven}
-          className="px-8 py-3 bg-blue-600 text-white font-bold rounded-lg shadow hover:bg-blue-700 transition"
+          className="px-8 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition"
         >
           Calculate Break-Even
         </button>
       </div>
 
+      {/* RESULTS */}
       {results && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-center mt-6">
-          <div className="bg-green-50 p-4 rounded-lg">
-            <h3 className="font-medium text-gray-700">Break-Even Rooms (Monthly)</h3>
-            <p className="text-2xl font-bold text-green-700">{results.breakEvenRooms.toFixed(1)}</p>
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
+          <div className="bg-green-50 p-4 rounded-xl">
+            <h3 className="text-gray-700 font-medium">Break-Even Rooms (Monthly)</h3>
+            <p className="text-2xl font-bold text-green-700">
+              {results.breakEvenRooms.toFixed(1)}
+            </p>
           </div>
-          <div className="bg-yellow-50 p-4 rounded-lg">
-            <h3 className="font-medium text-gray-700">Break-Even Occupancy (%)</h3>
-            <p className="text-2xl font-bold text-yellow-700">{results.breakEvenOccupancy.toFixed(1)}%</p>
+
+          <div className="bg-yellow-50 p-4 rounded-xl">
+            <h3 className="text-gray-700 font-medium">Break-Even Occupancy (%)</h3>
+            <p className="text-2xl font-bold text-yellow-700">
+              {results.breakEvenOccupancy.toFixed(1)}%
+            </p>
           </div>
         </div>
       )}
-    </div>
+    </CalculatorLayout>
   );
 };
 
