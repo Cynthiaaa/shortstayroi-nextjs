@@ -1,4 +1,4 @@
-// Airbnb calculators (20)
+// Airbnb calculators (19)
 import AirbnbADRCalculator from "@/components/calculators/airbnb/AirbnbADRCalculator";
 import AirbnbGuestAcquisitionCostCalculator from "@/components/calculators/airbnb/AirbnbGuestAcquisitionCostCalculator";
 import AirbnbPriceOptimizationCalculator from "@/components/calculators/airbnb/AibnbPriceOptimizationCalculator";
@@ -18,6 +18,7 @@ import AirbnbNightlyVsMonthlyRateCalculator from "@/components/calculators/airbn
 import AirbnbOccupancyRateCalculator from "@/components/calculators/airbnb/AirbnbOccupancyRateCalculator";
 import AirbnbSeasonalityImpactCalculator from "@/components/calculators/airbnb/AirbnbSeasonalityImpactCalculator";
 import AirbnbTaxDeductionCalculator from "@/components/calculators/airbnb/AirbnbTaxDeductionCalculation";
+// cleaning fee optimization
 
 //Hotels calculators (6)
 import HotelBreakEvenCalculator from "@/components/calculators/hotel/HotelBreakEvenCalculator";
@@ -26,6 +27,38 @@ import HotelCostPerOccupiedRoomCalculator from "@/components/calculators/hotel/H
 import HotelOccupancyRateCalculator from "@/components/calculators/hotel/HotelOccupancyRateCalculator"; 
 import HotelStaffCostCalculator from "@/components/calculators/hotel/HotelStaffCostCalculator";
 import HotelAverageDailyRateCalculator from "@/components/calculators/hotel/HotelAverageDailyRateCalculator";
+
+// Finance (3)
+import SavingGoalCalculator from "@/components/calculators/finance/SavingGoalCalculator";
+import ProfitMarginCalculator from "@/components/calculators/finance/ProfitMarginCalculator";
+import NetPresentValueCalculator from "@/components/calculators/finance/NetPresentValueCalculator";
+
+// Real estate investment (8)
+// rental yield calculator 
+// property management fee calc
+// property appreciation fee
+// net operating income calc 
+// gross rent multi property calc
+// cashflow cal 
+// break even calc 
+// brrr strategy roi 
+
+// mortgage (2)
+// mortgage calc
+// loan to value ==>
+
+// Landlord (5)
+// security deposit interest calcularo
+// rent increase calc
+// prorata rent increase calc 
+// maintenance cost calc 
+// late rent fee calc 
+
+// Pricing (3)
+// seasonal demand simulator 
+// customer lifetime value 
+// customer acquisition cost acquisition 
+
 
 export const categories = [
   {
@@ -63,6 +96,43 @@ export const categories = [
       { slug: "hotel-cost-per-occupied-room-calculator", name: "Hotel Cost Per Occupied Room Calculator", component: HotelCostPerOccupiedRoomCalculator },
       { slug: "hotel-occupancy-rate-calculator", name: "Hotel Occupancy Rate Calculator", component: HotelOccupancyRateCalculator },
       { slug: "hotel-staff-cost-calculator", name: "Hotel Staff Cost Calculator", component: HotelStaffCostCalculator },   
+    ],
+  },
+  {
+    slug: "finance-calculators",
+    name: "Finance Calculators",
+    calculators: [
+      { slug: "net-present-value-calculator", name: "Net Present Value Calculator", component: NetPresentValueCalculator },
+      { slug: "profit-margin-calculator", name: "Profit Margin Calculator", component: ProfitMarginCalculator },
+      { slug: "saving-goal-calculator", name: "Saving Goal Calculator", component: SavingGoalCalculator },   
+    ],
+  },
+  {
+    slug: "landlord-calculators",
+    name: "Landlord Calculators",
+    calculators: [
+   
+    ],
+  },
+  {
+    slug: "mortgage-calculators",
+    name: "Mortgage Calculators",
+    calculators: [
+   
+    ],
+  },
+  {
+    slug: "pricing-calculators",
+    name: "Pricing Calculators",
+    calculators: [
+   
+    ],
+  },
+  {
+    slug: "real-estate-calculators",
+    name: "Real Estate Calculators",
+    calculators: [
+   
     ],
   },
 ];
