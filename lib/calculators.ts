@@ -43,16 +43,16 @@ import NetPresentValueCalculator from "@/components/calculators/finance/NetPrese
 // break even calc 
 // brrr strategy roi 
 
-// mortgage (2)
+// Mortgage (2)
 import MortgageCalculator from "@/components/calculators/mortgage/MortgageCalculator";
 import LoanToValueCalculator from "@/components/calculators/mortgage/LoanToValueCalculator";
 
 // Landlord (5)
-// security deposit interest calcularo
-// rent increase calc
-// prorata rent increase calc 
-// maintenance cost calc 
-// late rent fee calc 
+import LateRentFeeCalculator from "@/components/calculators/landlord/LateRentFeeCalculator";
+import MaintenanceCostCalculator from "@/components/calculators/landlord/MaintenanceCostCalculator";
+import SecurityDepositInterestCalculator from "@/components/calculators/landlord/SecurityDepositInterestCalculator";
+import ProRataRentCalculator from "@/components/calculators/landlord/ProrataRentIncreaseCalculator";
+import RentIncreaseCalculator from "@/components/calculators/landlord/RentIncreaseCalculator";
 
 // Pricing (3)
 // seasonal demand simulator 
@@ -111,7 +111,11 @@ export const categories = [
     slug: "landlord-calculators",
     name: "Landlord Calculators",
     calculators: [
-   
+      { slug: "late-rent-fee-calculator", name: "Late Rent Fee Calculator", component: LateRentFeeCalculator },
+      { slug: "maintenance-cost-calculator", name: "Maintenance Cost Calculator", component: MaintenanceCostCalculator  },
+      { slug: "prorata-rent-increase-calculator", name: "Prorata Rent Increase Calculator", component: ProRataRentCalculator },   
+      { slug: "rent-increase-calculator", name: "Rent Increase Calculator", component: RentIncreaseCalculator },
+      { slug: "security-deposit-interest-calculator", name: "Security Deposit Interest Calculator", component: SecurityDepositInterestCalculator },
     ],
   },
   {
